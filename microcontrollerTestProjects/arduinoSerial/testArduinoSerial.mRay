@@ -1,0 +1,75 @@
+{
+    "channels": [
+        {
+            "displayName": "", 
+            "name": "mR_testChannel", 
+            "show": true, 
+            "color": [
+                0, 
+                170, 
+                0
+            ], 
+            "isRequested": true, 
+            "id": 0, 
+            "displayScaleFactor": 1.0
+        }, 
+        {
+            "displayName": "", 
+            "name": "mR_incChannel", 
+            "show": true, 
+            "color": [
+                255, 
+                0, 
+                0
+            ], 
+            "isRequested": true, 
+            "id": 1, 
+            "displayScaleFactor": 3.0
+        }
+    ], 
+    "commands": [
+        {
+            "initialValue": 3.0, 
+            "displayName": "", 
+            "name": "mR_testParam", 
+            "min": -100000.0, 
+            "max": 100000.0, 
+            "valueType": 2, 
+            "pendingMode": false, 
+            "inputMethod": 1, 
+            "id": 0, 
+            "history": [
+                1.2, 
+                1.2, 
+                1.3, 
+                1.2, 
+                1.3, 
+                1.2, 
+                1.2, 
+                1.3
+            ]
+        }
+    ], 
+    "miscSettings": {
+        "controllerFrameworkAndInterface": "ARDUINO_SERIAL", 
+        "tabs": [
+            {
+                "className": "TabSmallGenericView", 
+                "pathToClassFile": "gui.tabSmallGenericView", 
+                "displayName": "Generische Ansicht"
+            }
+        ], 
+        "messageSkipMode": false, 
+        "comPortBaudRate": 115200, 
+        "comPortDescription": "Serielles USB-Ger\u00e4t (COM3)", 
+        "pauseAfterRecord": false, 
+        "computerIP": "192.168.0.133", 
+        "udpPort": 10000, 
+        "recordBufferLength": 1, 
+        "debugMode": false, 
+        "pathToControllerCodeFolder": "D:\\00 eigene Daten\\000 FH\\S 4\\Regelungstechnik\\Regelungsversuch\\microRay\\microcontrollerTestProjects\\arduinoSerial\\src", 
+        "suppressParameterConfirmation": false, 
+        "controllerLoopCycleTimeInUs": 1000000, 
+        "controllerIP": "192.168.0.15"
+    }
+}
