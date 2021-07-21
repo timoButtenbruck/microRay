@@ -107,9 +107,9 @@ class SmallGenericCommand(BaseCommand):
 
         self.horizontalSlider.setGeometry(QtCore.QRect(85, self.editAreaHCenter - 0.5 * self.switchButton.boundingRect().height(), 110, 28))
         self.horizontalSlider.setOrientation(QtCore.Qt.Horizontal)
-        self.horizontalSlider.setMinimum(0)#self.command.getLowerLimit(self))
-        self.horizontalSlider.setMaximum(20)#self.command.getUpperLimit(self))
-        self.horizontalSlider.valueChanged.connect(self.updateLabel)
+        self.horizontalSlider.setMinimum(0)
+        self.horizontalSlider.setMaximum(100)
+        self.horizontalSlider.sliderReleased.connect(self.updateSlider)
         self.horizontalSlider.hide()
 
 
@@ -155,9 +155,6 @@ class SmallGenericCommand(BaseCommand):
 
         self.valueLineEdit.setStyleSheet(self.normalStyleSheet)
         self.valueLineEdit.hide()
-
-
-
 
 
         self.settingsButton = SymbolButton(SymbolButton.SETTINGS, self)
@@ -214,16 +211,6 @@ class SmallGenericCommand(BaseCommand):
 
         self.actualizeInputMethod()
 
-    def updateLabel(self):
-        self.command.setValue(self.horizontalSlider.value())
-        #val = str(self.horizontalSlider.value())
-        #print val
-
-
-
-    #def setSliderRange(self):
-     #   self.command.getUpperLimit
-      #  self.command.getLowerLimit
 
     def showHistory(self):
         # print self.command.history
@@ -322,6 +309,15 @@ class SmallGenericCommand(BaseCommand):
         self.switchButton.hide()
         self.horizontalSlider.hide()
 
+        self.command.displayName = unicode(self.settingsWindow.lineEditDisplayName.text())
+        self.command.setPendingSendMode(self.settingsWindow.checkBoxPendingMode.isChecked())
+
+        minText = self.settingsWindow.lineEditMin.text()
+        self.setMinimum(minText)
+
+        maxText = self.settingsWindow.lineEditMax.text()
+        self.setMaximum(maxText)
+
         if self.settingsWindow.radioButtonValueMode.isChecked() is True:
             self.valueLineEdit.show()
             self.command.setInputMethod(Command.VALUE_INPUT)
@@ -334,17 +330,42 @@ class SmallGenericCommand(BaseCommand):
         if self.settingsWindow.radioButtonSliderMode.isChecked() is True:
             self.horizontalSlider.show()
             self.command.setInputMethod(Command.SLIDER_INPUT)
+            self.updateSliderRange()
 
 
-        self.command.displayName = unicode(self.settingsWindow.lineEditDisplayName.text())
-        self.command.setPendingSendMode(self.settingsWindow.checkBoxPendingMode.isChecked())
 
-        minText = self.settingsWindow.lineEditMin.text()
-        self.setMinimum(minText)
-
-        maxText = self.settingsWindow.lineEditMax.text()
-        self.setMaximum(maxText)
         self.update()
+
+    def updateSliderRange(self):
+
+        low = self.command.getLowerLimit()
+        high = self.command.getUpperLimit()
+
+        if low < 0 and high > 0:
+            self.horizontalSlider.setMinimum(-50)
+            self.horizontalSlider.setMaximum(50)
+        elif low == 0 and high > 0:
+            self.horizontalSlider.setMinimum(0)
+            self.horizontalSlider.setMaximum(100)
+        elif low < 0 and high == 0:
+            self.horizontalSlider.setMinimum(-100)
+            self.horizontalSlider.setMaximum(0)
+        elif low < 0 and high < 0:
+            self.horizontalSlider.setMinimum(-100)
+            self.horizontalSlider.setMaximum(-1)
+        elif low > 0 and high > 0:
+            self.horizontalSlider.setMinimum(100)
+            self.horizontalSlider.setMaximum(1)
+        self.update()
+
+    def updateSlider(self):
+        lowerLimit = self.command.getLowerLimit()
+        upperLimit = self.command.getUpperLimit()
+        difLimit = upperLimit-lowerLimit
+
+        self.horizontalSlider.
+
+        self.command.setValue(self.horizontalSlider.value()*difLimit/100)
 
     def actualizeInputMethod(self):
         self.valueLineEdit.hide()
