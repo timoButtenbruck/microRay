@@ -17,7 +17,9 @@ AVAILABLE_FRAMEWORKS = [
     {"macroName": "MBED_OS_UDP", "displayName": u"Mbed OS UDP", "interface": "UDP", "template": "mbed_os_udp.c"},
     {"macroName": "MBED_OS_SERIAL", "displayName": u"Mbed OS Serial", "interface": "SERIAL", "template": "mbed_os_serial.c"},
     {"macroName": "ARDUINO_UDP", "displayName": u"Arduino UDP", "interface": "UDP", "template": "arduino_udp.c"},
-    {"macroName": "ARDUINO_SERIAL", "displayName": u"Arduino Serial", "interface": "SERIAL", "template": "arduino_serial.c"}
+    {"macroName": "ARDUINO_SERIAL", "displayName": u"Arduino Serial", "interface": "SERIAL", "template": "arduino_serial.c"},
+    {"macroName": "CUBE_IDE_UDP", "displayName": u"Cube IDE UDP", "interface": "UDP", "template": "cube_ide_udp.c"},
+    {"macroName": "CUBE_IDE_SERIAL", "displayName": u"Cube IDE Serial", "interface": "SERIAL", "template": "cube_ide_serial.c"}
 ]
 
 RELATIVE_PATH_TO_APPLICATION_SETTINGS = "applicationSettings.json"

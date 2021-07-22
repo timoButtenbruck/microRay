@@ -110,6 +110,8 @@ class SmallGenericCommand(BaseCommand):
         self.horizontalSlider.setMinimum(0)
         self.horizontalSlider.setMaximum(100)
         self.horizontalSlider.sliderReleased.connect(self.updateSlider)
+        self.sliderLowerLimit = 0
+        self.sliderUpperLimit = 100
         self.horizontalSlider.hide()
 
 
@@ -341,31 +343,40 @@ class SmallGenericCommand(BaseCommand):
         low = self.command.getLowerLimit()
         high = self.command.getUpperLimit()
 
-        if low < 0 and high > 0:
-            self.horizontalSlider.setMinimum(-50)
-            self.horizontalSlider.setMaximum(50)
-        elif low == 0 and high > 0:
-            self.horizontalSlider.setMinimum(0)
-            self.horizontalSlider.setMaximum(100)
-        elif low < 0 and high == 0:
-            self.horizontalSlider.setMinimum(-100)
-            self.horizontalSlider.setMaximum(0)
-        elif low < 0 and high < 0:
-            self.horizontalSlider.setMinimum(-100)
-            self.horizontalSlider.setMaximum(-1)
-        elif low > 0 and high > 0:
-            self.horizontalSlider.setMinimum(100)
-            self.horizontalSlider.setMaximum(1)
+        self.horizontalSlider.setMinimum(low)
+        self.horizontalSlider.setMaximum(high)
+        self.horizontalSlider.setValue(low)
+        self.command.setValue(self.horizontalSlider.value())
+        # if low < 0 and high > 0:
+        #     self.sliderLowerLimit = -50
+        #     self.sliderUpperLimit = 50
+        # elif low == 0 and high > 0:
+        #     self.sliderLowerLimit = 0
+        #     self.sliderUpperLimit = 100
+        # elif low < 0 and high == 0:
+        #     self.sliderLowerLimit = -100
+        #     self.sliderUpperLimit = 0
+        # elif low < 0 and high < 0:
+        #     self.sliderLowerLimit = -101
+        #     self.sliderUpperLimit = -1
+        # elif low > 0 and high > 0:
+        #     self.sliderLowerLimit = 1
+        #     self.sliderUpperLimit = 101
+
+        # self.horizontalSlider.setMinimum(self.sliderLowerLimit)
+        # self.horizontalSlider.setMaximum(self.sliderUpperLimit)
         self.update()
 
     def updateSlider(self):
-        lowerLimit = self.command.getLowerLimit()
-        upperLimit = self.command.getUpperLimit()
-        difLimit = upperLimit-lowerLimit
-
-        self.horizontalSlider.
-
-        self.command.setValue(self.horizontalSlider.value()*difLimit/100)
+        # lowerLimit = self.command.getLowerLimit()
+        # upperLimit = self.command.getUpperLimit()
+        # limitDif = upperLimit - lowerLimit
+        #
+        # sliderDif = self.sliderUpperLimit - self.sliderLowerLimit
+        #
+        # self.horizontalSlider.setTickInterval(100)
+        # self.command.setValue(self.horizontalSlider.value() * limitDif / sliderDif)
+        self.command.setValue(self.horizontalSlider.value())
 
     def actualizeInputMethod(self):
         self.valueLineEdit.hide()
